@@ -1,0 +1,445 @@
+@import '../_variables.scss';
+@import '../utils/mixins';
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column; // Header at the top, content below
+  height: 100vh; // Full viewport height
+  background-color: $background;
+}
+
+.contentArea {
+  flex-grow: 1;
+  overflow: auto;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editorContainer {
+  display: flex;
+  height: 100vh; // Make it span the full viewport height
+}
+
+.sidebarArea {
+  flex-shrink: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  width: var(--sidebar-width, 250px); // Default to 300px, can be overridden dynamically
+
+  @media (max-width: 768px) {
+    width: 200px; // Adjust width for smaller screens
+  }
+
+  @media (max-width: 480px) {
+    width: 150px; // Further adjust for very small screens
+  }
+
+  .sidenav-bg:hover {
+    background-color: $background;
+    border-radius: $border-radius;
+  }
+}
+
+
+.diagramArea {
+  flex-grow: 1; // This will make the diagram area take the remaining space
+  background-color: #ffffff; // Example background color for the diagram area
+  padding: 20px; // Add some padding if needed
+}
+
+@include media-breakpoint-down(lg) {
+  .sidebarArea {
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    z-index: 1;
+    margin-left: -250px; // Adjust this according to your sidebar width
+    transition: 0.2s ease-in;
+    &.showSidebar {
+      margin-left: 0px;
+    }
+  }
+}
+
+.button {
+  background-color: #41C9E2;
+  width: 90%; // Set width to 80% of the parent element's width
+  color: #F7EEDD;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  display: block; // Ensures the button behaves as a block element for full width
+  text-align: center; // Center the text within the button
+}
+
+.button2 {
+  background-color: #41C9E2;
+  width: 100px; // Set width to 80% of the parent element's width
+  color: #F7EEDD;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center; // Center the text within the button
+  margin-left: 10px;
+}
+
+.dashboard-list {
+  width: 100%; /* Ensure the list takes up the full width */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.dashboard-list li {
+  width: 100%; /* Ensure list items take up the full width */
+  margin-bottom: 10px; /* Add space between list items */
+}
+
+.dashboard-button2 {
+  color: $secondary;
+  background-color: white;
+  width: 100%; /* Set the button to 100% of its parent's width */
+  padding: 5px 20px; /* Adjust padding for better spacing */
+  border: 2px solid $primary;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center; /* Center the text within the button */
+  display: block; /* Make the button behave like a block element to take full width */
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.dashboard {
+  width: 95%;
+  border: 2px solid $primary;
+  border-radius: 20px;
+}
+
+.close-button {
+  margin-right: 5px;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.content-area {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  background-color: $background;
+  height: 100%;
+}
+
+.sidebar-toggle {
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+  margin: auto;
+}
+
+.diagram-container {
+  height: 95%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  border: 3px solid $tertiary;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: auto;
+}
+
+.diagram-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;  // Ensures the flex container takes up the full width
+  margin-top: 10px;
+  h4 {
+    margin: 0;  // Remove default margin to align it perfectly to the left
+  }
+
+  .button-group {
+    display: flex;
+    gap: 8px;  // Adds space between the buttons
+    justify-content: flex-end;
+  }
+}
+
+#canvas-wrapper {
+  width: 100%;
+  height: 90%;
+  border: 2px solid $primary;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#canvas {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-sidebar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 3px solid black;
+}
+
+.editor-container {
+  height: 95%;
+  width: 30%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 3px solid $tertiary;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  overflow-y: auto;
+}
+
+.monaco-container {
+  border: 2px solid $primary;
+  height: 25%;
+  width: 80%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card-title {
+  text-align: center;
+  color: $primary;
+  border-bottom: 1px solid $primary;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid $tertiary;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.image-dashboard {
+  height: auto;
+  padding: 1px;
+}
+
+.loading-text {
+  font-size: 18px;
+  color: $tertiary;
+  margin-top: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid $primary;
+}
+
+.link-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.normal-link {
+  display: inline;
+  text-decoration: none;
+  color: $secondary;
+  margin-right: 5px;
+}
+
+.link {
+  display: inline;
+  text-decoration: none;
+  color: $info;
+  margin-right: 5px;
+}
+
+.button {
+  background-color: $primary;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.message {
+  color: $primary;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.label {
+  color: $primary;
+  display: "block";
+}
+
+.submit-button{
+  color: $secondary;
+  background-color: white;
+  padding: 8px 50px;
+  border: 2px solid $primary;
+  border-radius: 20px;
+  border: "none";
+  cursor: pointer;
+}
+
+.generate-button {
+  color: $secondary; 
+  background-color: white;
+  padding: 10px 20px;
+  border: 2px solid $primary;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+  margin-top: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.canva-button {
+  color: $secondary;
+  background-color: white;
+  padding: 5px 5px;
+  border: 2px solid $primary;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 100px;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 5px;
+  display: block;
+  position: relative;
+}
+
+.title-style{
+  color: white;
+  background-color: $primary;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: "none";
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.dashboard-button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin: 1px;
+  border-radius: 20px;
+  transform: rotate(var(--rotation, 0deg));  // Default to 0deg if no custom property is set
+  transition: transform 0.3s ease;
+}
+
+.Outsidelayout-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;  // Stack items vertically
+  justify-content: center; // Center items vertically
+  align-items: center;     // Center items horizontally
+  height: 100%;
+}
+
+.card-input {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);  // Subtle shadow for depth
+  width: 40%;  // Half width for the right side
+  height: 80vh;  // Full height of the viewport
+  border-top: 5px solid black;
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+  border-left: none;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.card-image {
+  background-size: 200%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 60%;  // Half width for the left side
+  height: 80vh;  // Full height of the viewport
+  border-top: 5px solid black;
+  border-right: none;
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.canva-edit-button {
+  color: $secondary;
+  background-color: white;
+  padding: 5px 5px;
+  border: 2px solid $primary;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 40px;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 5px;
+  display: block;
+  position: relative;
+}
